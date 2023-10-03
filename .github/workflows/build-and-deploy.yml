@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-nad-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,9 +21,23 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm build
+        env:
+          NITRO_PRESET: github_pages
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./.output/public
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github_pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
-        with:
-          folder: .output/server
-          clean: true
+        uses: actions/deploy-pages@v1
