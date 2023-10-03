@@ -31,8 +31,6 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./.output/public
-        env:
-          NUXT_APP_BASE_URL: nuxt-base
 
   deploy:
     needs: build
