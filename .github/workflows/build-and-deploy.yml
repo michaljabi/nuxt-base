@@ -26,6 +26,7 @@ jobs:
       - name: Build
         run: pnpm build
         env:
+          NUXT_APP_BASE_URL: nuxt-base
           NITRO_PRESET: github_pages
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v1
