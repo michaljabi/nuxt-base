@@ -26,7 +26,6 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          NUXT_APP_BASE_URL: nuxt-base
           NITRO_PRESET: github_pages
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v1
@@ -46,3 +45,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        env:
+          NUXT_APP_BASE_URL: nuxt-base
