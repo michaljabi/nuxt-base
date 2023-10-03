@@ -19,6 +19,10 @@ jobs:
         run: npm install -g pnpm
       - name: Install
         run: pnpm install
+      - name: Prepare DB
+        run: pnpm migrate:latest
+      - name: Seed DB
+        run: pnpm seed:run
       - name: Build
         run: pnpm build
         env:
